@@ -1,0 +1,124 @@
+/* style.css */
+
+/* Cores Base: Neutros e Verde Análogo (Natureza/Sustentabilidade) */
+:root {
+    --color-primary: #4CAF50; /* Verde Principal */
+    --color-secondary: #8BC34A; /* Verde Mais Claro (Análogo) */
+    --color-background: #F4F4F4; /* Fundo Levemente Cinza/Bege */
+    --color-text: #333333; /* Texto Escuro */
+    --color-highlight: #FF9800; /* Laranja/Âmbar para Alerta (Obrigatório em Estoque!) */
+    --color-border: #CCCCCC;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* --- Layout Principal --- */
+header {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header a, header button {
+    background: none;
+    border: 1px solid white;
+    color: white;
+    padding: 8px 15px;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+header button:hover {
+    background-color: var(--color-secondary);
+}
+
+.container, .main-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Formulários e Inputs --- */
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button, .nav-button, .action-button {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover, .nav-button:hover, .action-button:hover {
+    background-color: var(--color-secondary);
+}
+
+/* --- Tabelas de Dados (Cadastro e Estoque) --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+
+th {
+    background-color: var(--color-secondary);
+    color: white;
+}
+
+/* --- Estilos Específicos --- */
+.message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.message.error {
+    background-color: #FFCDD2;
+    color: #C62828;
+}
+
+.message.success {
+    background-color: #C8E6C9;
+    color: #2E7D32;
+}
+
+/* Estilo para ALERTAS de Estoque Mínimo (Requisito 7.1.4) */
+.low-stock {
+    background-color: var(--color-highlight); /* Laranja */
+    color: white;
+    font-weight: bold;
+}

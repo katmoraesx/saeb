@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAEP - Cadastro de Produto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <p>Gestão de Cadastro</p>
+        <a href="main.html" class="action-button">Voltar ao Principal</a>
+    </header>
+
+    <div class="container">
+        <h2>Cadastro e Edição de Produtos</h2>
+        
+        <form id="productForm">
+            <input type="hidden" id="productId">
+            
+            <label for="name">Nome do Produto:</label>
+            <input type="text" id="name" required placeholder="Ex: Martelo de Unha 23mm">
+
+            <label for="sku">SKU / Código:</label>
+            <input type="text" id="sku" placeholder="Opcional: MTO001">
+
+            <label for="min_quantity">Estoque Mínimo (Alerta):</label>
+            <input type="number" id="min_quantity" value="0" required>
+
+            <label for="description">Descrição:</label>
+            <textarea id="description" placeholder="Detalhes do material, peso, etc."></textarea>
+            
+            <button type="submit" id="saveProductBtn">Salvar Produto</button>
+            <button type="button" id="cancelEditBtn" style="background-color: #9E9E9E; display: none;">Cancelar Edição</button>
+        </form>
+        
+        <hr style="margin: 30px 0;">
+
+        <h2>Lista de Produtos</h2>
+        
+        <input type="text" id="searchBar" placeholder="Buscar por nome, SKU..." style="width: 50%; display: inline-block;">
+        <button id="searchBtn" style="width: 15%;">Buscar</button>
+        
+        <div id="messageContainer"></div>
+
+        <table id="productsTable">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>SKU</th>
+                    <th>Estoque Atual</th>
+                    <th>Estoque Mínimo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="productsTableBody">
+                </tbody>
+        </table>
+    </div>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/products.js"></script> 
+</body>
+</html>
