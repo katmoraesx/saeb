@@ -13,17 +13,45 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['post'])
     def adjust(self, request, pk=None):
-        # ajustar quantidade via endpoint /api/products/{pk}/adjust/
         product = self.get_object()
-        amount = int(request.data.get('amount', 0))
+        
+        # --- 1. Validação de Quantidade (Amount) ---
+        try:
+            # Tenta converter o 'amount'. Se for inválido, cai no 'except'
+            amount = int(request.data.get('amount', 0))
+        except ValueError:
+            return Response({'amount': 'A quantidade deve ser um número inteiro válido.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if amount <= 0:
+            return Response({'amount': 'A quantidade deve ser maior que zero.'}, status=status.HTTP_400_BAD_REQUEST)
+        
         mtype = request.data.get('movement_type', StockMovement.ENTRY)
+
+        # --- 2. Lógica de Ajuste e Prevenção de Estoque Negativo ---
         if mtype == StockMovement.ENTRY:
             product.quantity += amount
         else:
+            # Validação para evitar que a saída deixe o estoque negativo
+            if product.quantity < amount:
+                return Response({'amount': f'A saída de {amount} excede o estoque atual de {product.quantity}.'}, status=status.HTTP_400_BAD_REQUEST)
             product.quantity -= amount
+            
         product.save()
-        # criar movimento
-        StockMovement.objects.create(product=product, movement_type=mtype, amount=amount, performed_by=request.user, notes=request.data.get('notes',''))
+        
+        # --- 3. Correção do Erro Crítico (performed_by) ---
+        # Verifica se o usuário está autenticado antes de atribuir ao campo ForeignKey.
+        # Se for um AnonymousUser (não logado), define como None (permitido pelo model).
+        user_to_assign = request.user if request.user.is_authenticated else None
+        
+        # Criar movimento
+        StockMovement.objects.create(
+            product=product, 
+            movement_type=mtype, 
+            amount=amount, 
+            performed_by=user_to_assign, # <-- CORRIGIDO AQUI
+            notes=request.data.get('notes','')
+        )
+        
         serializer = self.get_serializer(product)
         return Response(serializer.data)
 

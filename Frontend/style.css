@@ -1,17 +1,18 @@
-/* style.css */
+/* style.css – Tema moderno, feminino e elegante */
 
-/* Cores Base: Neutros e Verde Análogo (Natureza/Sustentabilidade) */
+/* ---- Paleta de Cores ---- */
 :root {
-    --color-primary: #4CAF50; /* Verde Principal */
-    --color-secondary: #8BC34A; /* Verde Mais Claro (Análogo) */
-    --color-background: #F4F4F4; /* Fundo Levemente Cinza/Bege */
-    --color-text: #333333; /* Texto Escuro */
-    --color-highlight: #FF9800; /* Laranja/Âmbar para Alerta (Obrigatório em Estoque!) */
-    --color-border: #CCCCCC;
+    --color-primary: #E158DA;     /* Rosa vibrante */
+    --color-secondary: #7D4AE5;   /* Roxo moderno */
+    --color-background: #FDF7FF;  /* Lavanda claríssimo */
+    --color-text: #3C2A4D;        /* Roxo escuro neutro */
+    --color-border: #E4D7F7;      /* Borda lilás suave */
+    --color-highlight: #FF6F61;   /* Coral rosado (alertas) */
 }
 
+/* ---- Fonte Global ---- */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: "Poppins", "Segoe UI", Arial, sans-serif;
     background-color: var(--color-background);
     color: var(--color-text);
     margin: 0;
@@ -19,106 +20,138 @@ body {
     line-height: 1.6;
 }
 
-/* --- Layout Principal --- */
+/* ---- Header ---- */
 header {
-    background-color: var(--color-primary);
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
     color: white;
-    padding: 15px 30px;
+    padding: 18px 35px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 header a, header button {
-    background: none;
-    border: 1px solid white;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    padding: 9px 18px;
     color: white;
-    padding: 8px 15px;
+    border-radius: 20px;
     cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
     text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s;
 }
 
-header button:hover {
-    background-color: var(--color-secondary);
+header button:hover, header a:hover {
+    background: white;
+    color: var(--color-secondary);
 }
 
+/* ---- Containers ---- */
 .container, .main-container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 30px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(125, 74, 229, 0.12);
 }
 
-/* --- Formulários e Inputs --- */
+/* ---- Inputs ---- */
 input, textarea, select {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 12px;
+    margin-bottom: 18px;
     border: 1px solid var(--color-border);
-    border-radius: 4px;
-    box-sizing: border-box;
+    background: #FBF8FF;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: 0.2s;
 }
 
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 6px rgba(125, 74, 229, 0.25);
+}
+
+/* ---- Botões ---- */
 button, .nav-button, .action-button {
-    background-color: var(--color-primary);
+    background: var(--color-primary);
     color: white;
-    padding: 10px 20px;
+    padding: 12px 22px;
     border: none;
-    border-radius: 4px;
+    border-radius: 30px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s;
     text-decoration: none;
-    display: inline-block;
 }
 
 button:hover, .nav-button:hover, .action-button:hover {
-    background-color: var(--color-secondary);
+    background: var(--color-secondary);
 }
 
-/* --- Tabelas de Dados (Cadastro e Estoque) --- */
+/* Botões específicos */
+.btn-entry {
+    background: #7DDBA0; /* verde suave feminino */
+}
+
+.btn-exit {
+    background: #FF6F61; /* coral rosado */
+}
+
+.btn-entry:hover { opacity: 0.9; }
+.btn-exit:hover { opacity: 0.9; }
+
+/* ---- Tabelas ---- */
 table {
     width: 100%;
     border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
     margin-top: 20px;
 }
 
-th, td {
+th {
+    background: var(--color-secondary);
+    color: white;
+    padding: 14px;
+    font-weight: 600;
+}
+
+td {
     padding: 12px;
-    text-align: left;
     border-bottom: 1px solid var(--color-border);
 }
 
-th {
-    background-color: var(--color-secondary);
-    color: white;
-}
-
-/* --- Estilos Específicos --- */
+/* ---- Mensagens ---- */
 .message {
-    padding: 10px;
+    padding: 12px;
+    border-radius: 10px;
     margin-bottom: 15px;
-    border-radius: 4px;
+    font-weight: 500;
 }
 
 .message.error {
-    background-color: #FFCDD2;
-    color: #C62828;
+    background-color: #FFD6E0;
+    color: #D81B60;
 }
 
 .message.success {
-    background-color: #C8E6C9;
+    background-color: #D6F8E2;
     color: #2E7D32;
 }
 
-/* Estilo para ALERTAS de Estoque Mínimo (Requisito 7.1.4) */
+/* ---- Estoque mínimo (alerta) ---- */
 .low-stock {
-    background-color: var(--color-highlight); /* Laranja */
-    color: white;
+    background-color: var(--color-highlight);
+    color: white !important;
     font-weight: bold;
+    border-radius: 6px;
+    padding: 5px 10px;
 }

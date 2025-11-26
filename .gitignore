@@ -1,6 +1,44 @@
+# ---- Python ----
 __pycache__/
-db.sqlite3
-*.pyc
-*.pyo
+*.py[cod]
+*$py.class
+
+# ---- Environment ----
 .env
 .venv/
+venv/
+ENV/
+env/
+
+# ---- Django ----
+db.sqlite3
+media/
+staticfiles/
+static/
+
+# ---- Logs ----
+*.log
+
+# ---- IDEs e editores ----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---- Sistema operacional ----
+.DS_Store
+Thumbs.db
+
+# ---- Test / Coverage ----
+.coverage
+htmlcov/
+.pytest_cache/
+.cache/
+
+# ---- Migrations compiladas ----
+*/migrations/__pycache__/
+*/migrations/*.pyc
+
+# ---- Arquivos temporários ----
+*.tmp
+*.bak
