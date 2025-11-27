@@ -1,4 +1,3 @@
-Projeto Django gerado automaticamente — skeleton do back-end.
 
 Estrutura principal:
 - inventory/             -> projeto Django
@@ -7,13 +6,11 @@ Estrutura principal:
 - manage.py              -> script de gerenciamento
 - README.md              -> este arquivo
 
-Instruções rápidas:
-1) Crie um ambiente virtual:
+1) 
    python -m venv .venv
-   source .venv/bin/activate  # linux/mac
-   .\.venv\Scripts\activate # windows
+   .\.venv\Scripts\activate
 
-2) Instale dependências:
+2) 
    pip install -r requirements.txt
 
 3) Rode migrações e crie superuser:
@@ -30,4 +27,3 @@ Endpoints principais (API REST):
 - /api/products/{pk}/   -> retrieve/update/delete (GET/PUT/PATCH/DELETE)
 - /api/movements/       -> registro de entradas/saídas de estoque
 
-Este é um esqueleto inicial; ajuste conforme a especificação do avaliador.
