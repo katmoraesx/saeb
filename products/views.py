@@ -5,6 +5,7 @@ from .models import Product, StockMovement
 from .serializers import ProductSerializer, StockMovementSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
+from datetime import datetime # NOVO IMPORT
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all().order_by('name')
@@ -38,7 +39,19 @@ class ProductViewSet(viewsets.ModelViewSet):
             
         product.save()
         
-        # --- 3. Correção do Erro Crítico (performed_by) ---
+        # --- PROCESSAR DATA DA MOVIMENTAÇÃO (REQUISITO 7.1.3) ---
+        movement_date_str = request.data.get('movement_date')
+        movement_date = None
+        if movement_date_str:
+            try:
+                # Converte a string YYYY-MM-DD do input para objeto datetime do Python
+                movement_date = datetime.strptime(movement_date_str, '%Y-%m-%d')
+            except ValueError:
+                # Se for inválido, o model usará o default (timezone.now)
+                pass 
+        # --- FIM PROCESSAMENTO DATA ---
+        
+        # --- 3. Atribuição do Usuário e Criação do Movimento ---
         # Verifica se o usuário está autenticado antes de atribuir ao campo ForeignKey.
         # Se for um AnonymousUser (não logado), define como None (permitido pelo model).
         user_to_assign = request.user if request.user.is_authenticated else None
@@ -48,8 +61,9 @@ class ProductViewSet(viewsets.ModelViewSet):
             product=product, 
             movement_type=mtype, 
             amount=amount, 
-            performed_by=user_to_assign, # <-- CORRIGIDO AQUI
-            notes=request.data.get('notes','')
+            performed_by=user_to_assign,
+            notes=request.data.get('notes',''),
+            created_at=movement_date # CAMPO DE DATA ADICIONADO AQUI
         )
         
         serializer = self.get_serializer(product)

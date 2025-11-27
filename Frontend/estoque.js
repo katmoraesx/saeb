@@ -80,19 +80,21 @@ function populateProductSelector(products) {
     });
 }
 
-// Requisito 7.1.2: Registrar a movimentação (Entrada/Saída)
+// Requisito 7.1.2/7.1.3: Registrar a movimentação (Entrada/Saída)
 async function handleMovement(event) {
     event.preventDefault();
     
     const movementType = event.target.getAttribute('data-type'); // 'IN' ou 'OUT'
     const productId = document.getElementById('productSelector').value;
     const amount = parseInt(document.getElementById('amount').value);
+    const movementDate = document.getElementById('movementDate').value; // NOVO: Captura a data
     const notes = document.getElementById('notes').value;
     const messageContainer = document.getElementById('movementMessageContainer');
     messageContainer.innerHTML = '';
 
-    if (!productId || isNaN(amount) || amount <= 0) {
-        showMessageMovement('Selecione um produto e insira uma quantidade válida.', 'error');
+    // [MODIFICADO] Adicionar validação para a data
+    if (!productId || isNaN(amount) || amount <= 0 || !movementDate) {
+        showMessageMovement('Selecione um produto, a data da movimentação, e insira uma quantidade válida.', 'error');
         return;
     }
     
@@ -109,6 +111,7 @@ async function handleMovement(event) {
     const response = await apiPost(endpoint, {
         amount: amount,
         movement_type: movementType,
+        movement_date: movementDate, // NOVO: Envia a data para o backend
         notes: notes
     });
 
@@ -116,6 +119,7 @@ async function handleMovement(event) {
         showMessageMovement(`Movimentação de ${movementType === 'IN' ? 'Entrada' : 'Saída'} registrada com sucesso!`, 'success');
         document.getElementById('productSelector').value = '';
         document.getElementById('amount').value = '';
+        document.getElementById('movementDate').value = ''; // Limpar o campo de data
         document.getElementById('notes').value = '';
         loadInventoryAndSetup(); // Recarrega os dados para atualização do estoque e alertas
     } else {

@@ -5,7 +5,7 @@ class StockMovementSerializer(serializers.ModelSerializer):
     class Meta:
         model = StockMovement
         fields = ['id','product','movement_type','amount','performed_by','notes','created_at']
-        read_only_fields = ['performed_by','created_at']
+        read_only_fields = ['performed_by'] # created_at removido para permitir escrita
 
 class ProductSerializer(serializers.ModelSerializer):
     movements = StockMovementSerializer(many=True, read_only=True)
